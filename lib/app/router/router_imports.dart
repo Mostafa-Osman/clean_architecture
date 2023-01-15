@@ -6,5 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../moduels/auth/presentation/login/cubit/login_cubit.dart';
 import '../moduels/auth/presentation/login/screens/login_screen.dart';
+import '../moduels/home/presentation/cubit/home_cubit.dart';
+import '../moduels/home/presentation/screens/home_screen.dart';
 
 part 'app_router.dart';

@@ -18,6 +18,13 @@ class AppRouter {
             child: const LoginScreen(),
           ),
         );
+      case RouteNames.home:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => HomeCubit(),
+            child: const HomeScreen(),
+          ),
+        );
     }
   }
 }
