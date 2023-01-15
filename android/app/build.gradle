@@ -71,6 +71,8 @@ dependencies {
 //    implementation 'com.google.firebase:firebase-analytics'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.facebook.android:facebook-android-sdk:[5,6)'
+//    implementation "androidx.biometric:biometric:1.1.0"
+//    implementation 'androidx.fragment:fragment:1.5.5'
 
 
 }

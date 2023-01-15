@@ -28,6 +28,8 @@ class RegisterCubit extends Cubit<RegisterState> {
   final registerFormKey = GlobalKey<FormState>();
   final fullNameController = TextEditingController();
   final phoneController = TextEditingController();
+  final emailController = TextEditingController();
+
   bool isInputFieldsValid = true;
 
   Future<void> registerWithGmail() async {
@@ -51,26 +53,17 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   Future<void> registerWithFaceBook() async {
     emit(RegisterWithGmailLoading());
-
     FacebookAuth.instance
         .login(permissions: ["public_profile", "email"]).then((value) {
       FacebookAuth.instance.getUserData().then((userData) {
-        log('ssss');
+        log(userData.toString());
       });
     });
-    // if (googleAccount != null) {
-    //   try {
-    //     final registerResult = await registerFirebase.createUserWithEmailAndPassword(
-    //         email: googleAccount!.email, password: googleAccount!.id);
-    //     log(registerResult.user!.uid);
-    //     emit(RegisterWithGmailSuccess());
-    //   } catch (e, s) {
-    //     emit(RegisterWithGmailError(message: e.toString()));
-    //     log('Error in Register :$e', stackTrace: s);
-    //   }
-    // } else {
-    //   emit(RegisterWithGmailError(message: 'no account found'));
-    // }
+  }
+
+  Future<void> logOutWithFaceBook() async {
+    emit(LogoutWithFacebookSuccess());
+    FacebookAuth.instance.logOut();
   }
 
   // loggOut() async {
@@ -80,6 +73,9 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   String? validatePhoneNumber(String? value) =>
       validationRepo.validatePhoneNumber(value);
+
+  String? validateEmail(String? value) =>
+      validationRepo.validateEmail(value);
 
   String? validatePassword(String? value) =>
       validationRepo.validatePassword(value);
@@ -102,6 +98,7 @@ class RegisterCubit extends Cubit<RegisterState> {
     fullNameController.dispose();
     passwordController.dispose();
     rePasswordController.dispose();
+    emailController.dispose();
     return super.close();
   }
 }

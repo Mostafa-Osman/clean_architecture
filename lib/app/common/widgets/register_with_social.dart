@@ -1,20 +1,25 @@
 import 'package:clean_architecture/app/moduels/auth/presentation/register/cubit/register_cubit.dart';
+import 'package:clean_architecture/app/moduels/auth/presentation/register/screens/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class RegisterWithForm extends StatelessWidget {
-  const RegisterWithForm({Key? key}) : super(key: key);
+import '../../moduels/auth/presentation/login/cubit/login_cubit.dart';
+
+class RegisterWithSocial extends StatelessWidget {
+  final bool isLogin;
+
+  const RegisterWithSocial({Key? key, this.isLogin = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final registerCubit = context.read<RegisterCubit>();
-
+    final loginCubit = context.read<LoginCubit>();
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         InkWell(
-          onTap: () => registerCubit.registerWithGmail(),
+          onTap: () => isLogin ? null : registerCubit.registerWithGmail(),
           child: Container(
             height: 50.0,
             decoration: const BoxDecoration(
@@ -36,7 +41,7 @@ class RegisterWithForm extends StatelessWidget {
           width: 15,
         ),
         InkWell(
-          onTap: registerCubit.registerWithFaceBook,
+          onTap: isLogin ? null : registerCubit.registerWithFaceBook,
           child: Container(
             height: 50.0,
             decoration: const BoxDecoration(
@@ -54,6 +59,37 @@ class RegisterWithForm extends StatelessWidget {
             ),
           ),
         ),
+        const SizedBox(
+          width: 15,
+        ),
+        if (isLogin)
+          InkWell(
+            onTap: () async {
+              bool isAuthenticated = await loginCubit.authenticate();
+              if (isAuthenticated) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const RegisterScreen()),
+                );
+              } else {
+                Container();
+              }
+            },
+            child: Container(
+              height: 70.0,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Image.asset(
+                  'assets/icons/fingerPrint.jpg',
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ),
       ],
     );
   }

@@ -1,7 +1,7 @@
 import 'package:clean_architecture/app/common/themes/app_theme.dart';
 import 'package:clean_architecture/app/common/widgets/input_field/default_text_field.dart';
 import 'package:clean_architecture/app/moduels/auth/presentation/register/cubit/register_cubit.dart';
-import 'package:clean_architecture/app/moduels/auth/presentation/register/widgets/register_with_social.dart';
+import 'package:clean_architecture/app/common/widgets/register_with_social.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -28,7 +28,7 @@ class RegisterScreen extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                     color: AppTheme.lightPrimaryColor),
               ),
-              const SizedBox(height: 80.0),
+              const SizedBox(height: 40.0),
               Form(
                   key: registerCubit.registerFormKey,
                   child: Column(
@@ -47,6 +47,15 @@ class RegisterScreen extends StatelessWidget {
                         prefixIconPath: 'assets/icons/call.svg',
                         fillColor: const Color(0xFFCD77F2),
                         validator: registerCubit.validatePhoneNumber,
+                      ),
+                      const SizedBox(height: 10.0),
+                      DefaultTextField(
+                        title: 'Email',
+                        controller: registerCubit.emailController,
+                        textInputType: TextInputType.emailAddress,
+                        prefixIconPath: 'assets/icons/email.svg',
+                        fillColor: const Color(0xFFCD77F2),
+                        validator: registerCubit.validateEmail,
                       ),
                       const SizedBox(height: 10.0),
                       DefaultTextField(
@@ -69,7 +78,7 @@ class RegisterScreen extends StatelessWidget {
                       const SizedBox(height: 50.0),
                     ],
                   )),
-              const RegisterWithForm(),
+              const RegisterWithSocial(),
               const SizedBox(height: 50.0),
               DefaultAppButton(
                 title: 'submit',

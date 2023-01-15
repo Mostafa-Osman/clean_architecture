@@ -1,4 +1,6 @@
 import 'package:clean_architecture/app/common/extensions/context_extensions.dart';
+import 'package:clean_architecture/app/moduels/auth/presentation/login/cubit/login_cubit.dart';
+import 'package:clean_architecture/app/moduels/auth/presentation/login/screens/login_screen.dart';
 import 'package:clean_architecture/app/moduels/auth/presentation/register/cubit/register_cubit.dart';
 import 'package:clean_architecture/app/moduels/auth/presentation/register/screens/register_screen.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +14,7 @@ class MoApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => RegisterCubit()),
+        BlocProvider(create: (_) => LoginCubit()),
       ],
       child: GestureDetector(
         onTap: () => context.requestFocus(FocusNode()),
@@ -20,7 +23,7 @@ class MoApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          home: const RegisterScreen(),
+          home: const LoginScreen(),
         ),
       ),
     );

@@ -6,6 +6,7 @@ abstract class RegisterState {}
 class RegisterInitial extends RegisterState {}
 
 class RegisterRefreshUi extends RegisterState {}
+class LogoutWithFacebookSuccess extends RegisterState {}
 
 class RegisterWithGmailLoading extends RegisterState {}
 
