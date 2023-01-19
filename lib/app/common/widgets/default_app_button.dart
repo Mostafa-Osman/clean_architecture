@@ -4,8 +4,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../themes/app_theme.dart';
 
-class DefaultAppButton extends StatelessWidget {
+class DefaultButton extends StatelessWidget {
   final String title;
+  final String? fontFamily;
   final Color? titleColor;
   final TextStyle? textStyle;
   final Color? buttonColor;
@@ -21,13 +22,13 @@ class DefaultAppButton extends StatelessWidget {
   final Border? border;
   final double? titleSize;
 
-  const DefaultAppButton({
+  const DefaultButton({
     super.key,
     this.title = '',
     this.titleColor = Colors.white,
     this.buttonColor = AppTheme.lightPrimaryColor,
-    this.width = 220,
-    this.height = 42,
+    this.width = 305,
+    this.height = 44,
     this.onPress,
     this.onDisabledPressed,
     this.textStyle,
@@ -36,6 +37,7 @@ class DefaultAppButton extends StatelessWidget {
     this.suffixIconPath,
     this.border,
     this.titleSize,
+    this.fontFamily,
     this.isDisabled = false,
     this.isLoading = false,
   });
@@ -62,7 +64,7 @@ class DefaultAppButton extends StatelessWidget {
                 decoration: BoxDecoration(
                   color:
                       isDisabled ? AppTheme.disabledButtonColor : buttonColor,
-                  borderRadius: borderRadius ?? BorderRadius.circular(5),
+                  borderRadius: borderRadius ?? BorderRadius.circular(15),
                   border: border,
                 ),
                 child: Row(
@@ -79,6 +81,7 @@ class DefaultAppButton extends StatelessWidget {
                             color: titleColor,
                             // fontWeight: FontWeight.w300,
                             fontSize: titleSize ?? 16,
+                            fontFamily: fontFamily??'DMSans',
                           ),
                     ),
                     if (suffixIconPath != null) ...[

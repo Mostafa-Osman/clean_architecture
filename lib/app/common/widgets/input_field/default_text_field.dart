@@ -89,7 +89,7 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
               style: const TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
-                color: AppTheme.lightPrimaryColor,
+                color: AppTheme.disabledTextColor,
               ),
             ),
             const SizedBox(height: 5)
@@ -109,7 +109,7 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
               color: widget.textInputColor ?? inputTextColor,
             ),
             controller: controller,
-            cursorColor: AppColors.lightPrimaryColor,
+            cursorColor: AppTheme.lightPrimaryColor,
             decoration: inputDecoration,
             obscureText: obscureText,
             validator: widget.validator,
@@ -132,21 +132,21 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
   }
 
   Color get iconColor => isFocused || controller.text.isNotEmpty
-      ? AppColors.lightPrimaryColor
-      :Colors.white;
+      ? AppTheme.lightPrimaryColor
+      :Color(0xff172B4D);
 
   List<TextInputFormatter> get inputFormatters =>
       [LengthLimitingTextInputFormatter(widget.maxLength)];
 
   Color get inputTextColor =>
-      isFocused ? AppTheme.lightPrimaryColor : AppColors.darkPrimaryColor;
+      isFocused ? AppTheme.lightPrimaryColor : AppTheme.darkPrimaryColor;
 
   bool get isFocused => focusNode != null && focusNode!.hasFocus;
 
   OutlineInputBorder _buildOutlineInputBorder(Color color) {
     return OutlineInputBorder(
       borderSide: BorderSide(color: color),
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: BorderRadius.circular(15),
     );
   }
 
@@ -154,12 +154,12 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
         contentPadding: EdgeInsets.zero,
         errorMaxLines: 3,
         filled: true,
-        fillColor: widget.fillColor ?? AppColors.fillColor,
+        fillColor: widget.fillColor ?? AppTheme.fillColor,
         enabledBorder: _buildOutlineInputBorder(
           widget.enabledBorderColor ?? Colors.grey.shade400,
         ),
         border: _buildOutlineInputBorder(Colors.grey.shade400),
-        errorBorder: _buildOutlineInputBorder(AppColors.redColor),
+        errorBorder: _buildOutlineInputBorder(AppTheme.redColor),
         focusedBorder: _buildOutlineInputBorder(
           focusNode != null ? AppTheme.lightPrimaryColor : Colors.grey.shade400,
         ),
@@ -167,7 +167,7 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
         hintStyle: const TextStyle(
           fontWeight: FontWeight.w400,
           fontSize: 12,
-          color: Colors.white,
+          color: Color(0xffC1C7D0),
         ),
         prefixIcon: Padding(
           padding: const EdgeInsets.all(14.0),

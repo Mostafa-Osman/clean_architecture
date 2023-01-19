@@ -4,6 +4,13 @@ class AppRouter {
   // ignore: body_might_complete_normally_nullable
   Route? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case RouteNames.onBoarding:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => LoginCubit(),
+            child: const OnBoardingScreen(),
+          ),
+        );
       case RouteNames.register:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
@@ -16,6 +23,13 @@ class AppRouter {
           builder: (_) => BlocProvider(
             create: (_) => LoginCubit(),
             child: const LoginScreen(),
+          ),
+        );
+      case RouteNames.phoneNumber:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => RegisterCubit(),
+            child: const PhoneScreen(),
           ),
         );
       case RouteNames.home:

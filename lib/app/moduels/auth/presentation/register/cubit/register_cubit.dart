@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:clean_architecture/app/moduels/auth/data/model/register_dto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -8,7 +9,8 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 // import 'package:flutter_facebook_sdk/flutter_facebook_sdk.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import '../../../../../services/locator_service.dart';
-import '../../../data/repo/validation_repository.dart';
+import '../../../data/repo/auth_repositore.dart';
+import '../../../data/repo/validation_repo.dart';
 
 part 'register_state.dart';
 
@@ -17,6 +19,7 @@ part 'register_state.dart';
 
 class RegisterCubit extends Cubit<RegisterState> {
   RegisterCubit() : super(RegisterInitial());
+  final authRepository = gt<AuthRepo>();
   final validationRepo = gt<AuthValidationRepo>();
   final registerFirebase = FirebaseAuth.instance;
   final _googleSignIn = GoogleSignIn();
@@ -29,11 +32,31 @@ class RegisterCubit extends Cubit<RegisterState> {
   final fullNameController = TextEditingController();
   final phoneController = TextEditingController();
   final emailController = TextEditingController();
-
   bool isInputFieldsValid = true;
 
+  // late  RegisterModel registerModel;
+  RegisterDto get userData => RegisterDto(
+        name: fullNameController.text,
+        phone: phoneController.text,
+        password: passwordController.text,
+        email: emailController.text,
+      );
+
+  Future<void> registerWithForm() async {
+    if (!isValidForm) return;
+    emit(RegisterLoading());
+    try {
+      log(userData.toString());
+      await authRepository.register(userData);
+      emit(RegisterSuccess());
+    } catch (e, s) {
+      log(e.toString(), stackTrace: s);
+      emit(RegisterError(message: e.toString()));
+    }
+  }
+
   Future<void> registerWithGmail() async {
-    emit(RegisterWithGmailLoading());
+    emit(RegisterLoading());
     googleAccount = await _googleSignIn.signIn();
     if (googleAccount != null) {
       try {
@@ -41,24 +64,32 @@ class RegisterCubit extends Cubit<RegisterState> {
             await registerFirebase.createUserWithEmailAndPassword(
                 email: googleAccount!.email, password: googleAccount!.id);
         log(registerResult.user!.uid);
-        emit(RegisterWithGmailSuccess());
+
+        emit(RegisterSuccess());
       } catch (e, s) {
-        emit(RegisterWithGmailError(message: e.toString()));
+        emit(RegisterError(message: e.toString()));
         log('Error in Register :$e', stackTrace: s);
       }
     } else {
-      emit(RegisterWithGmailError(message: 'no account found'));
+      emit(RegisterError(message: 'no account found'));
     }
   }
 
   Future<void> registerWithFaceBook() async {
-    emit(RegisterWithGmailLoading());
-    FacebookAuth.instance
-        .login(permissions: ["public_profile", "email"]).then((value) {
+    emit(RegisterLoading());
+    try {
+      FacebookAuth.instance.login(permissions: ["public_profile", "email"]);
+      final accessToken = FacebookAuth.instance.accessToken;
+
       FacebookAuth.instance.getUserData().then((userData) {
         log(userData.toString());
+        fillRegisterData(userData);
       });
-    });
+      emit(RegisterWithFaceBookSuccess());
+    } catch (e, s) {
+      log(e.toString(), stackTrace: s);
+      emit(RegisterError(message: e.toString()));
+    }
   }
 
   Future<void> logOutWithFaceBook() async {
@@ -70,12 +101,13 @@ class RegisterCubit extends Cubit<RegisterState> {
   //   googleAccount = await _googleSignIn.signOut();
   //   emit(SignOutWithGoogleSuccess());
   // }
+  String? validateFullName(String? value) =>
+      validationRepo.validateFullName(value);
 
   String? validatePhoneNumber(String? value) =>
       validationRepo.validatePhoneNumber(value);
 
-  String? validateEmail(String? value) =>
-      validationRepo.validateEmail(value);
+  String? validateEmail(String? value) => validationRepo.validateEmail(value);
 
   String? validatePassword(String? value) =>
       validationRepo.validatePassword(value);
@@ -85,11 +117,17 @@ class RegisterCubit extends Cubit<RegisterState> {
         rePasswordController.text,
       );
 
-  bool confirm() {
+  bool get isValidForm {
     if (registerFormKey.currentState!.validate()) {
       return true;
     }
     return false;
+  }
+
+  void fillRegisterData(Map<String, dynamic> userData) {
+    fullNameController.text = userData['name'];
+    emailController.text = userData['email'];
+    passwordController.text = userData['id'];
   }
 
   @override

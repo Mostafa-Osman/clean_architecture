@@ -8,12 +8,13 @@ class RegisterInitial extends RegisterState {}
 class RegisterRefreshUi extends RegisterState {}
 class LogoutWithFacebookSuccess extends RegisterState {}
 
-class RegisterWithGmailLoading extends RegisterState {}
+class RegisterLoading extends RegisterState {}
+class RegisterWithFaceBookSuccess extends RegisterState {}
 
-class RegisterWithGmailSuccess extends RegisterState {}
+class RegisterSuccess extends RegisterState {}
 
-class RegisterWithGmailError extends RegisterState {
+class RegisterError extends RegisterState {
   final String message;
 
-  RegisterWithGmailError({required this.message});
+  RegisterError({required this.message});
 }

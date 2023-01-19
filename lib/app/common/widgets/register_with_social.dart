@@ -23,14 +23,14 @@ class RegisterWithSocial extends StatelessWidget {
           child: Container(
             height: 50.0,
             decoration: const BoxDecoration(
-              color: Colors.white,
+              color: Colors.red,
               shape: BoxShape.circle,
             ),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: SvgPicture.asset(
                 'assets/icons/google.svg',
-                color: Colors.red,
+                color: Colors.white,
                 width: 50,
                 fit: BoxFit.fitHeight,
               ),
@@ -65,7 +65,7 @@ class RegisterWithSocial extends StatelessWidget {
         if (isLogin)
           InkWell(
             onTap: () async {
-              bool isAuthenticated = await loginCubit.authenticate();
+               bool isAuthenticated = await loginCubit.authenticate();
               if (isAuthenticated) {
                 Navigator.push(
                   context,

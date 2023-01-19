@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="92" height="92" viewBox="0 0 92 92">
+  <defs>
+    <clipPath id="clip-path">
+      <circle id="Base" cx="40" cy="40" r="40" fill="#fdc42c" style="mix-blend-mode: lighten;isolation: isolate"/>
+    </clipPath>
+  </defs>
+  <g id="Thumb" transform="translate(6 6)">
+    <g id="Base-2" data-name="Base" fill="#fdc42c" stroke="#fff" stroke-width="6">
+      <circle cx="40" cy="40" r="40" stroke="none"/>
+      <circle cx="40" cy="40" r="43" fill="none"/>
+    </g>
+    <g id="Thumb-2" data-name="Thumb" clip-path="url(#clip-path)">
+      <g id="Ellipse_10" data-name="Ellipse 10" transform="translate(12 61)" fill="none" stroke="#fff" stroke-width="1.5">
+        <ellipse cx="28" cy="27.5" rx="28" ry="27.5" stroke="none"/>
+        <ellipse cx="28" cy="27.5" rx="27.25" ry="26.75" fill="none"/>
+      </g>
+      <g id="Ellipse_11" data-name="Ellipse 11" transform="translate(22 21)" fill="none" stroke="#fff" stroke-width="1.5">
+        <ellipse cx="18" cy="17.5" rx="18" ry="17.5" stroke="none"/>
+        <ellipse cx="18" cy="17.5" rx="17.25" ry="16.75" fill="none"/>
+      </g>
+    </g>
+  </g>
+</svg>
