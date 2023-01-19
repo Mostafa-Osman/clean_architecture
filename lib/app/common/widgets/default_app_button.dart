@@ -9,6 +9,7 @@ class DefaultButton extends StatelessWidget {
   final String? fontFamily;
   final Color? titleColor;
   final TextStyle? textStyle;
+  final FontWeight?fontWeight;
   final Color? buttonColor;
   final double width;
   final double height;
@@ -26,6 +27,7 @@ class DefaultButton extends StatelessWidget {
     super.key,
     this.title = '',
     this.titleColor = Colors.white,
+    this.fontWeight,
     this.buttonColor = AppTheme.lightPrimaryColor,
     this.width = 305,
     this.height = 44,
@@ -79,7 +81,7 @@ class DefaultButton extends StatelessWidget {
                       style: textStyle ??
                           TextStyle(
                             color: titleColor,
-                            // fontWeight: FontWeight.w300,
+                            fontWeight:fontWeight ??FontWeight.w300,
                             fontSize: titleSize ?? 16,
                             fontFamily: fontFamily??'DMSans',
                           ),

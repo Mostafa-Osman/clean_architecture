@@ -11,18 +11,39 @@ class AppRouter {
             child: const OnBoardingScreen(),
           ),
         );
-      case RouteNames.register:
-        return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (_) => RegisterCubit(),
-            child: const RegisterScreen(),
-          ),
-        );
+      // case RouteNames.register:
+      //   return MaterialPageRoute(
+      //     builder: (_) => BlocProvider(
+      //       create: (_) => RegisterCubit(),
+      //       child: const RegisterScreen(),
+      //     ),
+      //   );
       case RouteNames.login:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (_) => LoginCubit(),
             child: const LoginScreen(),
+          ),
+        );
+      case RouteNames.forgetPassword:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => LoginCubit(),
+            child: const PhoneNumberScreen(),
+          ),
+        );
+      case RouteNames.resetPassword:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => LoginCubit(),
+            child: const ResetPasswordScreen(),
+          ),
+        );
+      case RouteNames.otp:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => LoginCubit(),
+            child: const OtpScreen(),
           ),
         );
       case RouteNames.phoneNumber:

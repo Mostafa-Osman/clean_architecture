@@ -1,5 +1,5 @@
 import 'package:clean_architecture/app/moduels/auth/presentation/register/cubit/register_cubit.dart';
-import 'package:clean_architecture/app/moduels/auth/presentation/register/screens/register_screen.dart';
+import 'package:clean_architecture/app/moduels/auth/presentation/register/screens/register.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -67,11 +67,11 @@ class RegisterWithSocial extends StatelessWidget {
             onTap: () async {
                bool isAuthenticated = await loginCubit.authenticate();
               if (isAuthenticated) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const RegisterScreen()),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //       builder: (context) => const RegisterScreen()),
+                // );
               } else {
                 Container();
               }

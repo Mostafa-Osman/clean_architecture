@@ -1,7 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../../../data/model/on_boarding_model.dart';
+import '../../auth/data/model/on_boarding_model.dart';
+
 
 part 'on_boarding_state.dart';
 

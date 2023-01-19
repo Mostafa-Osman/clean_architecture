@@ -10,7 +10,7 @@
 // import '../../../../../common/widgets/register_with_social.dart';
 // import '../../../../../common/widgets/toast.dart';
 // import '../../../../../router/router_name.dart';
-// import '../../register/screens/register_screen.dart';
+// import '../../register/screens/register.dart';
 //
 // class LoginScreen extends StatelessWidget {
 //   const LoginScreen({Key? key}) : super(key: key);

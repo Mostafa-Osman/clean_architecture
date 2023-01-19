@@ -1,116 +1,105 @@
-import 'package:clean_architecture/app/common/extensions/context_extensions.dart';
-import 'package:clean_architecture/app/common/themes/app_theme.dart';
-import 'package:clean_architecture/app/common/widgets/input_field/default_text_field.dart';
-import 'package:clean_architecture/app/common/widgets/shimmer/shimmer_button.dart';
-import 'package:clean_architecture/app/moduels/auth/presentation/register/cubit/register_cubit.dart';
-import 'package:clean_architecture/app/common/widgets/register_with_social.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../../common/themes/app_theme.dart';
+import '../../../../../common/widgets/auth_widget.dart';
 import '../../../../../common/widgets/default_app_button.dart';
-import '../../../../../common/widgets/toast.dart';
-import '../../../../../router/router_name.dart';
+import '../../../../../common/widgets/input_field/default_text_field.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    final registerCubit = context.read<RegisterCubit>();
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: BlocConsumer<RegisterCubit, RegisterState>(
-        listener: (context, state) {
-          if (state is RegisterError) {
-            showToast(message: state.message, state: ToastStates.error);
-          } else if (state is RegisterSuccess) {
-            showToast(message: 'Register Success', state: ToastStates.success);
-          } else if (state is RegisterWithFaceBookSuccess) {
-            context.pushNamedAndRemoveAll(RouteNames.phoneNumber);
-          }
-        },
-        builder: (context, state) {
-          return SingleChildScrollView(
-            child: Container(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 50.0, horizontal: 15.0),
-              child: Column(
+      body: SingleChildScrollView(
+        child: AuthWidget(
+          icon: 'assets/icons/person.svg',
+          title: 'Getting Started',
+          description: 'Create an account to continue!',
+          form: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children:  [
+              const DefaultTextField(
+                title: 'Full Name',
+                hintText: 'enter your Name',
+                fillColor: Color(0xFFF4F5F7),
+                prefixIconPath: 'assets/icons/user.svg',
+                //todo if field is not empty 'assets/icons/true.svg':null
+                suffixIconPath: true ? 'assets/icons/true.svg' : null,
+              ),
+              const  SizedBox(height: 12),
+              const  DefaultTextField(
+                title: 'Phone Number',
+                hintText: 'enter your phone Number',
+                textInputType: TextInputType.phone,
+                maxLength: 11,
+                fillColor: Color(0xFFF4F5F7),
+                prefixIconPath: 'assets/icons/phone.svg',
+                //todo if length of string is 11 'assets/icons/true.svg':null
+                suffixIconPath: true ? 'assets/icons/true.svg' : null,
+              ),
+              const  SizedBox(height: 12),
+              const  DefaultTextField(
+                title: 'Password',
+                hintText: 'enter password',
+                fillColor: Color(0xFFF4F5F7),
+                prefixIconPath: 'assets/icons/lock.svg',
+                isPasswordField: true,
+              ),
+              const  SizedBox(height: 12),
+              const DefaultTextField(
+                title: 'Repeat Password',
+                hintText: 'Repeat password',
+                fillColor: Color(0xFFF4F5F7),
+                prefixIconPath: 'assets/icons/lock.svg',
+                isPasswordField: true,
+              ),
+              const   SizedBox(height: 12),
+              const  DefaultButton(
+                width: double.infinity,
+                //todo if all field  is empty  Color(0xFFA8A8A8):AppTheme.lightPrimaryColor
+                buttonColor:
+                    true ? AppTheme.lightPrimaryColor : Color(0xffFFF3D5),
+                title: 'SIGN UP',
+                //todo if all field is empty  Color(0xFFA8A8A8):AppTheme.lightPrimaryColor
+                titleColor: true ? Colors.white : Color(0xFFA8A8A8),
+                fontWeight: FontWeight.w700,
+              ),
+              const  SizedBox(height: 12),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const SizedBox(height: 50.0),
                   const Text(
-                    'Create Account',
+                    'Already have an account?',
+                    textAlign: TextAlign.right,
                     style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.w600,
-                        color: AppTheme.lightPrimaryColor),
-                  ),
-                  const SizedBox(height: 40.0),
-                  Form(
-                    key: registerCubit.registerFormKey,
-                    child: Column(
-                      children: [
-                        DefaultTextField(
-                          title: 'Full Name',
-                          controller: registerCubit.fullNameController,
-                          prefixIconPath: 'assets/icons/profile.svg',
-                          fillColor: const Color(0xFFCD77F2),
-                          validator: registerCubit.validateFullName,
-                        ),
-                        const SizedBox(height: 10.0),
-                        DefaultTextField(
-                          title: 'Phone',
-                          controller: registerCubit.phoneController,
-                          textInputType: TextInputType.phone,
-                          maxLength: 11,
-                          prefixIconPath: 'assets/icons/call.svg',
-                          fillColor: const Color(0xFFCD77F2),
-                          validator: registerCubit.validatePhoneNumber,
-                        ),
-                        const SizedBox(height: 10.0),
-                        DefaultTextField(
-                          title: 'Email',
-                          controller: registerCubit.emailController,
-                          textInputType: TextInputType.emailAddress,
-                          prefixIconPath: 'assets/icons/email.svg',
-                          fillColor: const Color(0xFFCD77F2),
-                          validator: registerCubit.validateEmail,
-                        ),
-                        const SizedBox(height: 10.0),
-                        DefaultTextField(
-                          title: 'password',
-                          controller: registerCubit.passwordController,
-                          prefixIconPath: 'assets/icons/lock.svg',
-                          isPasswordField: true,
-                          fillColor: const Color(0xFFCD77F2),
-                          validator: registerCubit.validatePassword,
-                        ),
-                        const SizedBox(height: 10.0),
-                        DefaultTextField(
-                          title: 'Re write password',
-                          controller: registerCubit.rePasswordController,
-                          prefixIconPath: 'assets/icons/lock.svg',
-                          fillColor: const Color(0xFFCD77F2),
-                          validator: (_) => registerCubit.validateRePassword(),
-                          isPasswordField: true,
-                        ),
-                        const SizedBox(height: 30.0),
-                      ],
+                      fontSize: 14.0,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: 'DMSans',
                     ),
                   ),
-                  const RegisterWithSocial(),
-                  const SizedBox(height: 30.0),
-                  (state is RegisterLoading)
-                      ? const ShimmerButton()
-                      : DefaultButton(
-                          title: 'submit',
-                          onPress: registerCubit.registerWithForm,
-                        ),
                   TextButton(
-                      onPressed: context.pop,
-                      child: const Text('Already have an account?'))
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text(
+                      'Sign in',
+                      textAlign: TextAlign.right,
+                      style: TextStyle(
+                        fontSize: 14.0,
+                        color: AppTheme.lightPrimaryColor,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: 'DMSans',
+                      ),
+                    ),
+                  ),
                 ],
               ),
-            ),
-          );
-        },
+
+            ],
+          ),
+        ),
       ),
     );
   }

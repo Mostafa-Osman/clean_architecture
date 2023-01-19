@@ -19,13 +19,13 @@ void main() async {
   GetItLocator.init();
   if (kIsWeb || defaultTargetPlatform == TargetPlatform.macOS) {
     // initialiaze the facebook javascript SDK
-    await FacebookAuth.instance.webAndDesktopInitialize(
-      appId: "567886921872821",
-      cookie: true,
-      xfbml: true,
-      version: "v15.0",
-    );
+    // await FacebookAuth.instance.webAndDesktopInitialize(
+    //   appId: "567886921872821",
+    //   cookie: true,
+    //   xfbml: true,
+    //   version: "v15.0",
+    // );
   }
-  await Firebase.initializeApp();
+  // await Firebase.initializeApp();
   runApp(const MoApp());
 }

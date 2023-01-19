@@ -87,7 +87,8 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
             Text(
               widget.title!,
               style: const TextStyle(
-                fontSize: 12,
+                fontSize: 14,
+                fontFamily: 'DMSans',
                 fontWeight: FontWeight.w600,
                 color: AppTheme.disabledTextColor,
               ),
@@ -133,7 +134,7 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
 
   Color get iconColor => isFocused || controller.text.isNotEmpty
       ? AppTheme.lightPrimaryColor
-      :Color(0xff172B4D);
+      :const Color(0xff172B4D);
 
   List<TextInputFormatter> get inputFormatters =>
       [LengthLimitingTextInputFormatter(widget.maxLength)];
@@ -156,12 +157,12 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
         filled: true,
         fillColor: widget.fillColor ?? AppTheme.fillColor,
         enabledBorder: _buildOutlineInputBorder(
-          widget.enabledBorderColor ?? Colors.grey.shade400,
+          widget.enabledBorderColor ?? AppTheme.fillColor,
         ),
         border: _buildOutlineInputBorder(Colors.grey.shade400),
         errorBorder: _buildOutlineInputBorder(AppTheme.redColor),
         focusedBorder: _buildOutlineInputBorder(
-          focusNode != null ? AppTheme.lightPrimaryColor : Colors.grey.shade400,
+          focusNode != null ? AppTheme.lightPrimaryColor :AppTheme.disabledButtonColor,
         ),
         hintText: widget.hintText ?? widget.title,
         hintStyle: const TextStyle(
@@ -201,7 +202,7 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
                     child: SvgPicture.asset(
                       widget.suffixIconPath!,
                       width: 7.6,
-                      color: iconColor,
+                      color: AppTheme.lightPrimaryColor,
                       fit: BoxFit.scaleDown,
                     ),
                   )
