@@ -2,10 +2,6 @@ import 'package:clean_architecture/app/common/extensions/context_extensions.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../moduels/auth/presentation/reset_password/screens/otp_screen.dart';
-import '../themes/app_theme.dart';
-import 'default_app_button.dart';
-
 class AuthWidget extends StatelessWidget {
   final String icon;
   final String title;
@@ -36,7 +32,6 @@ class AuthWidget extends StatelessWidget {
         children: [
           Expanded(
             child: SingleChildScrollView(
-              //todo
               child: Stack(
                 children: [
                   Container(
@@ -44,10 +39,12 @@ class AuthWidget extends StatelessWidget {
                     width: context.width,
                     margin: const EdgeInsets.only(top: 180),
                     decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(30.0),
-                            topRight: Radius.circular(30.0))),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30.0),
+                        topRight: Radius.circular(30.0),
+                      ),
+                    ),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 35.0),
                       child: Column(
@@ -95,12 +92,12 @@ class AuthWidget extends StatelessWidget {
               ),
             ),
           ),
-          if(button!=null)
-          Container(
-              color: Colors.white,
-              padding: const EdgeInsets.only(
-                  top: 10, bottom: 45, left: 35, right: 35),
-              child: button!),
+          if (button != null)
+            Container(
+                color: Colors.white,
+                padding: const EdgeInsets.only(
+                    top: 10, bottom: 45, left: 35, right: 35),
+                child: button!),
         ],
       ),
     );

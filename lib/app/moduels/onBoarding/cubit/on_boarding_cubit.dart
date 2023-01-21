@@ -10,20 +10,11 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
   OnBoardingCubit() : super(OnBoardingInitial());
   final boardingController = PageController();
   int currentIndex = 0;
-  List<OnBoardingModel> contents = [
-    OnBoardingModel(
-      title:  'Your Passion for giving is\n\t\t\t\t\t\t\t\t\t\tCommendable.',
-      image: 'assets/icons/logo.png',
-    ),
+  List<String> titles = [
+     'Your Passion for giving is\nCommendable.',
 
-    OnBoardingModel(
-      title:  'Don\'t wait. This time is to\n\t\t\t\t\t\tGive.',
-      image: 'assets/icons/logo.png',
-    ),
-    OnBoardingModel(
-      title:  'You have the Power to\n\t\t\t\t\t\tBring Page3.',
-      image: 'assets/icons/logo.png',
-    ),
+       'Don\'t wait. This time is to\nGive.',
+        'You have the Power to\nBring Page3.',
   ];
   void onPageChanged(int index) {
     currentIndex = index;

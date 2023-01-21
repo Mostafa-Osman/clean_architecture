@@ -18,48 +18,36 @@ class ResetPasswordScreen extends StatelessWidget {
           title: 'Reset your password',
           description:
               'At least 8 characters, with uppercase and\n lowercase letters',
-          form:const DefaultTextField(
-            title: 'New Password',
-
-            hintText: 'enter New password',
-            fillColor: Color(0xFFF4F5F7),
-            prefixIconPath: 'assets/icons/lock.svg',
-            isPasswordField: true,
+          form: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: const [
+              DefaultTextField(
+                title: 'New Password',
+                hintText: 'enter New password',
+                fillColor: Color(0xFFF4F5F7),
+                prefixIconPath: 'assets/icons/lock.svg',
+                isPasswordField: true,
+              ),
+              SizedBox(height: 13),
+              DefaultTextField(
+                title: 'Confirm Password',
+                hintText: 'Repeat password',
+                fillColor: Color(0xFFF4F5F7),
+                prefixIconPath: 'assets/icons/lock.svg',
+                isPasswordField: true,
+              ),
+            ],
           ),
-          // Column(
-          //   crossAxisAlignment: CrossAxisAlignment.end,
-          //   children:  const [
-          //     DefaultTextField(
-          //       title: 'New Password',
-          //       hintText: 'enter New password',
-          //       fillColor: Color(0xFFF4F5F7),
-          //       prefixIconPath: 'assets/icons/lock.svg',
-          //       isPasswordField: true,
-          //     ),
-          //     SizedBox(height: 13),
-          //     DefaultTextField(
-          //       title: 'Confirm Password',
-          //       hintText: 'Repeat password',
-          //       fillColor: Color(0xFFF4F5F7),
-          //       prefixIconPath: 'assets/icons/lock.svg',
-          //       isPasswordField: true,
-          //     ),
-          //
-          //   ],
-          // ),
           button: DefaultButton(
-            onPress: (){
+            onPress: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (context) => const LoginScreen()),
+                MaterialPageRoute(builder: (context) => const LoginScreen()),
               );
             },
             width: double.infinity,
             //todo if field in phone and pass is empty  Color(0xFFA8A8A8):AppTheme.lightPrimaryColor
-            buttonColor: true
-                ? AppTheme.lightPrimaryColor
-                : Color(0xffFFF3D5),
+            buttonColor: true ? AppTheme.lightPrimaryColor : Color(0xffFFF3D5),
             title: 'SIGN IN',
             //todo if field in phone and pass is empty  Color(0xFFA8A8A8):AppTheme.lightPrimaryColor
             titleColor: true ? Colors.white : Color(0xFFA8A8A8),

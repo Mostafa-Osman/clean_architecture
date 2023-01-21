@@ -18,89 +18,87 @@ class OtpScreen extends StatelessWidget {
           title: 'Verify your identity',
           //todo should add user phone
           description: 'We have just sent a code to (02)01128582414',
-          form: Expanded(
-            child: Column(
-              children: [
-                const SizedBox(height: 30),
-                PinCodeTextField(
-                  length: 6,
-                  autoFocus: true,
-                  cursorColor: AppTheme.lightPrimaryColor,
-                  keyboardType: TextInputType.number,
-                  animationType: AnimationType.fade,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  textStyle: const TextStyle(
-                    color: Color(0xff172B4D),
-                  ),
-                  pinTheme: PinTheme(
-                    shape: PinCodeFieldShape.box,
-                    borderRadius: BorderRadius.circular(10),
-                    borderWidth: 2,
-                    fieldHeight: 50,
-                    fieldWidth: 50,
-                    activeFillColor: AppTheme.fillColor,
-                    activeColor: AppTheme.lightPrimaryColor,
-                    inactiveColor: Colors.grey.shade300,
-                    inactiveFillColor: AppTheme.fillColor,
-                    selectedColor: AppTheme.lightPrimaryColor,
-                    selectedFillColor: AppTheme.fillColor,
-                  ),
-                  animationDuration: const Duration(milliseconds: 300),
-                  backgroundColor: Colors.transparent,
-                  enableActiveFill: true,
-                  // onCompleted: verificationCubit.saveOtpCode,
-                  // onChanged: verificationCubit.saveOtpCode,
-                  beforeTextPaste: (_) => true,
-                  appContext: context,
-                  onChanged: (String value) {},
+          form: Column(
+            children: [
+              const SizedBox(height: 30),
+              PinCodeTextField(
+                length: 6,
+                autoFocus: true,
+                cursorColor: AppTheme.lightPrimaryColor,
+                keyboardType: TextInputType.number,
+                animationType: AnimationType.fade,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                textStyle: const TextStyle(
+                  color: Color(0xff172B4D),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      'I didn\'t receive code.',
-                      textAlign: TextAlign.center,
+                pinTheme: PinTheme(
+                  shape: PinCodeFieldShape.box,
+                  borderRadius: BorderRadius.circular(10),
+                  borderWidth: 2,
+                  fieldHeight: 50,
+                  fieldWidth: 50,
+                  activeFillColor: AppTheme.fillColor,
+                  activeColor: AppTheme.lightPrimaryColor,
+                  inactiveColor: Colors.grey.shade300,
+                  inactiveFillColor: AppTheme.fillColor,
+                  selectedColor: AppTheme.lightPrimaryColor,
+                  selectedFillColor: AppTheme.fillColor,
+                ),
+                animationDuration: const Duration(milliseconds: 300),
+                backgroundColor: Colors.transparent,
+                enableActiveFill: true,
+                // onCompleted: verificationCubit.saveOtpCode,
+                // onChanged: verificationCubit.saveOtpCode,
+                beforeTextPaste: (_) => true,
+                appContext: context,
+                onChanged: (String value) {},
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    'I didn\'t receive code.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 12.0,
+                      color: AppTheme.disabledTextColor,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: 'DMSans',
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    child: const Text(
+                      'Resend Code.',
                       style: TextStyle(
                         fontSize: 12.0,
-                        color: AppTheme.disabledTextColor,
+                        color: AppTheme.lightPrimaryColor,
                         fontWeight: FontWeight.w600,
                         fontFamily: 'DMSans',
                       ),
                     ),
-                    TextButton(
-                      onPressed: () {},
-                      child: const Text(
-                        'Resend Code.',
-                        style: TextStyle(
-                          fontSize: 12.0,
-                          color: AppTheme.lightPrimaryColor,
-                          fontWeight: FontWeight.w600,
-                          fontFamily: 'DMSans',
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ],
-            ),
+                  )
+                ],
+              ),
+            ],
           ),
-        button:   DefaultButton(
+          button: DefaultButton(
             onPress: () {
-      Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const ResetPasswordScreen()),
-      );
-      },
-        width: double.infinity,
-        //todo if field in phone and pass is empty  Color(0xFFA8A8A8):AppTheme.lightPrimaryColor
-        buttonColor:
-        true ? AppTheme.lightPrimaryColor : Color(0xffFFF3D5),
-        title: 'Next',
-        //todo if field in phone and pass is empty  Color(0xFFA8A8A8):AppTheme.lightPrimaryColor
-        titleColor: true ? Colors.white : Color(0xFFA8A8A8),
-        fontWeight: FontWeight.w700,
-      ),
-
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ResetPasswordScreen(),
+                ),
+              );
+            },
+            width: double.infinity,
+            //todo if field in phone and pass is empty  Color(0xFFA8A8A8):AppTheme.lightPrimaryColor
+            buttonColor: true ? AppTheme.lightPrimaryColor : Color(0xffFFF3D5),
+            title: 'Next',
+            //todo if field in phone and pass is empty  Color(0xFFA8A8A8):AppTheme.lightPrimaryColor
+            titleColor: true ? Colors.white : Color(0xFFA8A8A8),
+            fontWeight: FontWeight.w700,
+          ),
         ),
       ),
     );

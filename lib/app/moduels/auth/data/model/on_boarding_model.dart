@@ -1,9 +1,9 @@
-class OnBoardingModel {
-  final String image;
-  final String title;
-
-  OnBoardingModel({
-    required this.image,
-    required this.title,
-  });
-}
+// class OnBoardingModel {
+//   final String image;
+//   final String title;
+//
+//   OnBoardingModel({
+//     required this.image,
+//     required this.title,
+//   });
+// }

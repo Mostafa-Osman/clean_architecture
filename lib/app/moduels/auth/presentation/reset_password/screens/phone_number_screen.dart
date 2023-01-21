@@ -13,39 +13,37 @@ class PhoneNumberScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          AuthWidget(
-            icon: 'assets/icons/open_lock.svg',
-            title: 'Password Recovery',
-            description: 'Enter your phone number to recover your\npassword',
-            form: const DefaultTextField(
-              title: 'Phone Number',
-              hintText: 'enter your phone Number',
-              textInputType: TextInputType.phone,
-              maxLength: 11,
-              fillColor: Color(0xFFF4F5F7),
-              prefixIconPath: 'assets/icons/phone.svg',
-              //todo if length of string is 11 'assets/icons/true.svg':null
-              suffixIconPath: true ? 'assets/icons/true.svg' : null,
-            ),
-            button: DefaultButton(
-              onPress: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const OtpScreen()),
-                );
-              },
-              width: double.infinity,
-              //todo if field in phone and pass is empty  Color(0xFFA8A8A8):AppTheme.lightPrimaryColor
-              buttonColor: true ? AppTheme.lightPrimaryColor : Color(0xffFFF3D5),
-              title: 'SEND CODE',
-              //todo if field in phone and pass is empty  Color(0xFFA8A8A8):AppTheme.lightPrimaryColor
-              titleColor: true ? Colors.white : Color(0xFFA8A8A8),
-              fontWeight: FontWeight.w700,
-            ),
+      body: SingleChildScrollView(
+        child: AuthWidget(
+          icon: 'assets/icons/open_lock.svg',
+          title: 'Password Recovery',
+          description: 'Enter your phone number to recover your\npassword',
+          form: const DefaultTextField(
+            title: 'Phone Number',
+            hintText: 'enter your phone Number',
+            textInputType: TextInputType.phone,
+            maxLength: 11,
+            fillColor: Color(0xFFF4F5F7),
+            prefixIconPath: 'assets/icons/phone.svg',
+            //todo if length of string is 11 'assets/icons/true.svg':null
+            suffixIconPath: true ? 'assets/icons/true.svg' : null,
           ),
-        ],
+          button: DefaultButton(
+            onPress: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const OtpScreen()),
+              );
+            },
+            width: double.infinity,
+            //todo if field in phone and pass is empty  Color(0xFFA8A8A8):AppTheme.lightPrimaryColor
+            buttonColor: true ? AppTheme.lightPrimaryColor : Color(0xffFFF3D5),
+            title: 'SEND CODE',
+            //todo if field in phone and pass is empty  Color(0xFFA8A8A8):AppTheme.lightPrimaryColor
+            titleColor: true ? Colors.white : Color(0xFFA8A8A8),
+            fontWeight: FontWeight.w700,
+          ),
+        ),
       ),
     );
   }

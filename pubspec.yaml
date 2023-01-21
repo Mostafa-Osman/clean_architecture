@@ -11,6 +11,8 @@ environment:
 
 dependencies:
   #=====================a
+  animated_splash_screen: ^1.3.0
+
 
   #=====================b
   bloc: ^8.1.0
@@ -23,6 +25,7 @@ dependencies:
   #=====================e
   #=====================f
   #  flutter_facebook_sdk: ^1.0.0
+  flame_splash_screen: ^0.1.0
   flutter_facebook_auth: ^5.0.7
   flutter:
     sdk: flutter
@@ -43,6 +46,8 @@ dependencies:
   #=====================k
   #=====================l
   local_auth: ^2.1.3
+  lottie: ^2.2.0
+
   #=====================m
   #=====================n
   #=====================o
